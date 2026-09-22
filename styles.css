@@ -143,6 +143,7 @@ h3 {
 
 .summary span,
 label,
+.field-label,
 .panel-head span,
 .game-meta,
 .empty {
@@ -169,6 +170,10 @@ label,
 label {
   display: grid;
   gap: 6px;
+}
+
+.field-label {
+  margin-bottom: 6px;
 }
 
 .layout {
@@ -354,10 +359,283 @@ label {
   flex: 0 0 auto;
 }
 
-.add-rule {
+.add-rule-btn {
+  margin-top: 2px;
+}
+
+.rule-ops {
+  display: inline-flex;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.rule-ops button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font-size: 13px;
+}
+
+.version-pill {
+  background: rgba(57, 116, 91, 0.12);
+  color: var(--green);
+}
+
+.version-section {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 10px;
+}
+
+.version-head {
+  margin-bottom: 8px;
+}
+
+.version-head h3 {
+  margin-bottom: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.version-count {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.version-head button {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.version-list {
   display: grid;
   gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.version-list li {
+  border: 1px solid #eef0f2;
+  border-radius: 6px;
+  padding: 8px 9px;
+  display: grid;
+  gap: 5px;
+}
+
+.version-list li.current {
+  border-color: var(--green);
+  background: rgba(57, 116, 91, 0.05);
+}
+
+.version-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.version-badge {
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(49, 95, 134, 0.12);
+  color: var(--blue);
+}
+
+.version-badge.act-create {
+  background: rgba(116, 100, 155, 0.14);
+  color: var(--lavender);
+}
+
+.version-badge.act-correct,
+.version-badge.act-add {
+  background: rgba(57, 116, 91, 0.13);
+  color: var(--green);
+}
+
+.version-badge.act-remove {
+  background: rgba(179, 72, 72, 0.12);
+  color: var(--red);
+}
+
+.version-badge.act-rollback {
+  background: rgba(213, 162, 61, 0.18);
+  color: #9a6f1d;
+}
+
+.version-tag {
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--ink);
+  color: #fff;
+}
+
+.version-reason {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.version-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.version-meta button {
+  padding: 3px 10px;
+  font-size: 12px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(32, 35, 38, 0.46);
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.modal {
+  width: min(460px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.modal.wide {
+  width: min(620px, 100%);
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.modal-head h2 {
+  margin-bottom: 0;
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.modal-tip {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.modal-form {
+  display: grid;
+  gap: 10px;
+}
+
+.old-rule {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  padding: 9px 11px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.modal-error {
+  margin: 0;
+  border-radius: 6px;
+  background: rgba(179, 72, 72, 0.1);
+  color: var(--red);
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.modal-error[hidden] {
+  display: none;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.version-meta-block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.version-reason-line {
+  flex-basis: 100%;
+  color: var(--ink);
+}
+
+.version-body {
+  display: grid;
+  gap: 8px;
+}
+
+.viewer-section {
+  padding: 9px 10px;
+}
+
+.rollback-panel {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+}
+
+.rollback-panel[hidden] {
+  display: none;
+}
+
+.current-hint {
   margin-top: 12px;
+  color: var(--green);
+}
+
+.current-hint[hidden] {
+  display: none;
 }
 
 .detail-actions {

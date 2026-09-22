@@ -121,6 +121,82 @@
       </section>
     </main>
 
-    <script src="app.js"></script>
+    <div class="modal-backdrop" id="revisionModal" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="revisionTitle">
+        <div class="modal-head">
+          <h2 id="revisionTitle">规则修订</h2>
+          <button type="button" id="revisionClose" class="icon-btn" aria-label="关闭">×</button>
+        </div>
+        <p class="modal-tip">新增、移除或改正规则都必须填写修订人与修订原因，缺任一项整次拒绝，规则保持不变。</p>
+        <form id="revisionForm" class="modal-form">
+          <div id="sectionGroup">
+            <label>
+              规则分类
+              <select id="revisionRuleKey">
+                <option value="forgets">容易忘的规则</option>
+                <option value="disputes">常见争议</option>
+                <option value="setup">开局准备</option>
+                <option value="scoring">计分提醒</option>
+              </select>
+            </label>
+          </div>
+          <div id="oldRuleGroup" hidden>
+            <div class="field-label">原规则</div>
+            <p id="oldRuleText" class="old-rule"></p>
+          </div>
+          <div id="newRuleGroup">
+            <label>
+              <span id="newRuleLabel">规则内容</span>
+              <textarea id="newRuleText" rows="3" placeholder="请填写修订后的规则内容"></textarea>
+            </label>
+          </div>
+          <label>
+            修订人
+            <input id="revisionEditor" type="text" placeholder="例：阿明" required />
+          </label>
+          <label>
+            修订原因
+            <textarea id="revisionReason" rows="2" placeholder="例：说明书第 6 页写明先结算事件再行动" required></textarea>
+          </label>
+          <p class="modal-error" id="revisionError" hidden></p>
+          <div class="modal-actions">
+            <button type="button" id="revisionCancel">取消</button>
+            <button type="button" class="primary" id="revisionConfirm">确认修订</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="versionModal" hidden>
+      <div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="versionTitle">
+        <div class="modal-head">
+          <h2 id="versionTitle">版本详情</h2>
+          <button type="button" id="versionClose" class="icon-btn" aria-label="关闭">×</button>
+        </div>
+        <div class="version-meta-block" id="versionMeta"></div>
+        <div id="versionBody" class="version-body"></div>
+        <p class="modal-error" id="versionError" hidden></p>
+        <div id="rollbackPanel" class="rollback-panel" hidden>
+          <p class="modal-tip">回滚只恢复该版本的规则内容，并生成一条新的“回滚”版本，被回滚到的旧版本和之后的历史版本都会继续保留。需填写修订人与原因。</p>
+          <label>
+            修订人
+            <input id="rollbackEditor" type="text" placeholder="执行回滚的人" required />
+          </label>
+          <label>
+            修订原因
+            <textarea id="rollbackReason" rows="2" required></textarea>
+          </label>
+        </div>
+        <p class="modal-tip current-hint" id="currentVersionHint" hidden>这是当前版本，无需回滚。</p>
+        <div class="modal-actions">
+          <button type="button" id="versionCancel">关闭</button>
+          <button type="button" class="primary" id="rollbackConfirmBtn">回滚到此版本</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="rules.js"></script>
+    <script src="versions.js"></script>
+    <script src="ui.js"></script>
   </body>
 </html>
